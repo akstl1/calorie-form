@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 
 class Calorie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # date = db.Column(db.Date)
+    date = db.Column(db.DateTime)
     breakfast_green = db.Column(db.Integer)
     lunch_green = db.Column(db.Integer)
     dinner_green = db.Column(db.Integer)

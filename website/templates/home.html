@@ -4,7 +4,7 @@
 <ul class="list-group list-group-flush" id="calories">
   {% for calorie in user.calories %}
   <li class="list-group-item">
-    {{ calorie.lunch_green }}
+    {{ calorie.date }}
     <button type="button" class="close" onClick="deleteCalorie({{ calorie.id }})">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -13,7 +13,7 @@
 </ul>
 <form method="POST">
   <!-- <textarea name="note" id="note" class="form-control"></textarea> -->
-  <!-- <input type="date" id="date" name='date' class="form-control" required></input> -->
+  <input type="date" id="date" name='date' class="form-control" required></input>
   <input type="number" id="breakfast_green" name="breakfast_green" class="form-control" placeholder='Breakfast Green Foods' required></input>
   <input type="number" id="lunch_green" name="lunch_green" class="form-control" placeholder='Lunch Green Foods' required></input>
   <input type="number" id="dinner_green" name="dinner_green" class="form-control" placeholder='Dinner Green Foods' required></input>

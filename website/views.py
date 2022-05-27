@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from .models import Calorie
 from . import db
 import json
-import datetime
+from datetime import datetime
 
 views = Blueprint('views', __name__)
 
@@ -13,7 +13,7 @@ views = Blueprint('views', __name__)
 def home():
     if request.method == 'POST':
         # note = request.form.get('note')
-        # date = datetime.datetime.strptime(request.form.get('date'),'%Y-%d-%m')
+        date = datetime.strptime(request.form.get('date'),'%Y-%m-%d')
         breakfast_green = request.form.get('breakfast_green')
         print(breakfast_green)
         lunch_green = request.form.get('lunch_green')
@@ -32,7 +32,7 @@ def home():
             # flash('Date can\'t be in the future!', category='error')
         else:
             new_calories = Calorie(
-                                    # date=date,
+                                    date=date,
                                    breakfast_green=breakfast_green,
                                    lunch_green=lunch_green,
                                    dinner_green=dinner_green,
