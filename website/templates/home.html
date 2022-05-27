@@ -1,21 +1,34 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
+<h1 align="center">Calories</h1>
+<ul class="list-group list-group-flush" id="calories">
+  {% for calorie in user.calories %}
   <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+    {{ calorie.lunch_green }}
+    <button type="button" class="close" onClick="deleteCalorie({{ calorie.id }})">
       <span aria-hidden="true">&times;</span>
     </button>
   </li>
   {% endfor %}
 </ul>
 <form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
+  <!-- <textarea name="note" id="note" class="form-control"></textarea> -->
+  <!-- <input type="date" id="date" name='date' class="form-control" required></input> -->
+  <input type="number" id="breakfast_green" name="breakfast_green" class="form-control" placeholder='Breakfast Green Foods' required></input>
+  <input type="number" id="lunch_green" name="lunch_green" class="form-control" placeholder='Lunch Green Foods' required></input>
+  <input type="number" id="dinner_green" name="dinner_green" class="form-control" placeholder='Dinner Green Foods' required></input>
+  <input type="number" id="snack_green" name="snack_green"  class="form-control" placeholder='Snack Green Foods' required></input>
+  <input type="number" id="breakfast_yellow" name="breakfast_yellow" class="form-control" placeholder='Breakfast Yellow Foods' required></input>
+  <input type="number" id="lunch_yellow" name="lunch_yellow" class="form-control" placeholder='Lunch Yellow Foods' required></input>
+  <input type="number" id="dinner_yellow" name="dinner_yellow" class="form-control" placeholder='Dinner Yellow Foods' required></input>
+  <input type="number" id="snack_yellow" name="snack_yellow" class="form-control" placeholder='Snack Yellow Foods' required></input>
+  <input type="number" id="breakfast_red" name="breakfast_red" class="form-control" placeholder='Breakfast Red Foods' required></input>
+  <input type="number" id="lunch_red" name="lunch_red" class="form-control" placeholder='Lunch Red Foods' required></input>
+  <input type="number" id="dinner_red" name="dinner_red" class="form-control" placeholder='Dinner Red Foods' required></input>
+  <input type="number" id="snack_red" name="snack_red" class="form-control" placeholder='Snack Red Foods' required></input>
   <br />
   <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
+    <button type="submit" class="btn btn-primary">Add Data</button>
   </div>
 </form>
 {% endblock %}

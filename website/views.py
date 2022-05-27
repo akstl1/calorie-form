@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Calorie
 from . import db
 import json
+import datetime
 
 views = Blueprint('views', __name__)
 
@@ -11,27 +12,56 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     if request.method == 'POST':
-        note = request.form.get('note')
-
-        if len(note) < 1:
-            flash('Note is too short!', category='error')
+        # note = request.form.get('note')
+        # date = datetime.datetime.strptime(request.form.get('date'),'%Y-%d-%m')
+        breakfast_green = request.form.get('breakfast_green')
+        print(breakfast_green)
+        lunch_green = request.form.get('lunch_green')
+        dinner_green = request.form.get('dinner_green')
+        snack_green = request.form.get('snack_green')
+        breakfast_yellow = request.form.get('breakfast_yellow')
+        lunch_yellow = request.form.get('lunch_yellow')
+        dinner_yellow = request.form.get('dinner_yellow')
+        snack_yellow = request.form.get('snack_yellow')
+        breakfast_red = request.form.get('breakfast_red')
+        lunch_red = request.form.get('lunch_red')
+        dinner_red = request.form.get('dinner_red')
+        snack_red = request.form.get('snack_red')
+        if snack_red=='1000000':
+            pass
+            # flash('Date can\'t be in the future!', category='error')
         else:
-            new_note = Note(data=note, user_id=current_user.id)
-            db.session.add(new_note)
+            new_calories = Calorie(
+                                    # date=date,
+                                   breakfast_green=breakfast_green,
+                                   lunch_green=lunch_green,
+                                   dinner_green=dinner_green,
+                                   snack_green=snack_green,
+                                   breakfast_yellow=breakfast_yellow,
+                                   lunch_yellow=lunch_yellow,
+                                   dinner_yellow=dinner_yellow,
+                                   snack_yellow=snack_yellow,
+                                   breakfast_red=breakfast_red,
+                                   lunch_red=lunch_red,
+                                   dinner_red=dinner_red,
+                                   snack_red=snack_red,
+                                   user_id=current_user.id)
+            db.session.add(new_calories)
+            print(new_calories.dinner_red)
             db.session.commit()
-            flash('Note added!', category='success')
+            flash('Calories added!', category='success')
 
     return render_template("home.html", user=current_user)
 
 
-@views.route('/delete-note', methods=['POST'])
-def delete_note():
-    note = json.loads(request.data)
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
+@views.route('/delete-calories', methods=['POST'])
+def delete_calories():
+    calorie = json.loads(request.data)
+    calorieId = calorie['calorieId']
+    calorie = Calorie.query.get(calorieId)
+    if calorie:
+        if calorie.user_id == current_user.id:
+            db.session.delete(calorie)
             db.session.commit()
 
     return jsonify({})
